@@ -4,3 +4,11 @@ build: cmd/sample-go-app/main.go
 
 clean:
 	rm sample-go-app
+
+security: trivy
+
+trivy:
+	trivy fs .
+
+gofmt:
+	gofmt -w .
