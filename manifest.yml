@@ -1,0 +1,8 @@
+applications:
+- name: sample-go-app
+  memory: 128M
+  instances: 1
+  command: ./sample-go-app
+  buildpacks:
+  - binary_buildpack
+
