@@ -3,6 +3,8 @@ applications:
   memory: 128M
   instances: 1
   command: ./sample-go-app
+  routes: 
+  - route: ((cf-host)).((cf-domain))
   buildpacks:
-  - binary_buildpack
+    - binary_buildpack
 

@@ -1,0 +1,31 @@
+#!/bin/bash
+
+make
+
+# Ensure you are logged into Cloud Foundry and targeted to the correct org/space
+# Get the current targeted org and space names
+CURRENT_ORG=$(cf target | grep 'org:' | awk '{print $2}')
+CURRENT_SPACE=$(cf target | grep 'space:' | awk '{print $2}')
+
+if [ -z "$CURRENT_ORG" ] || [ -z "$CURRENT_SPACE" ]; then
+  echo "Error: Could not determine Cloud Foundry org or space. Please target a space using 'cf target -o <org> -s <space>'."
+  exit 1
+fi
+
+APP_NAME="sample-go-app" # Replace with your app name
+DOMAIN="apps.aws.lab.fivetwenty.io" # Replace with your domain
+
+# Create the hostname including org and space
+HOSTNAME="${APP_NAME}-${CURRENT_SPACE}"
+
+# Generate the vars.yml file
+echo "Generating vars.yml with HOSTNAME: $HOSTNAME"
+cat <<EOF > vars.yml
+cf-host: $HOSTNAME
+cf-domain: $DOMAIN
+EOF
+
+# Push the application using the manifest and the generated vars file
+echo "Pushing the application with dynamic route..."
+cf push -f manifest.yml --vars-file vars.yml
+
