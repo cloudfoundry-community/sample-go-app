@@ -4,7 +4,8 @@ applications:
   instances: 1
   command: ./sample-go-app
   routes: 
-  - route: ((cf-host)).((cf-domain))
+  # - route: ((cf-host)).((cf-domain))
+  - route: sample-go-app-e2e.run.adepttech.ca
   buildpacks:
     - binary_buildpack
 
