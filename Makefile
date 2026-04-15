@@ -2,6 +2,10 @@
 build: cmd/sample-go-app/main.go
 	go build ./...
 
+build-linux: cmd/sample-go-app/main.go
+	GOOS=linux GOARCH=amd64 go build ./...
+
+
 clean::
 	rm sample-go-app
 
