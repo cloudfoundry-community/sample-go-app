@@ -4,7 +4,7 @@ applications:
   env:
     GO_INSTALL_PACKAGE_SPEC: github.com/cloudfoundry-community/sample-go-app/cmd/sample-go-app
   instances: 1
-  command: chmod 755 ./sample-go-app && ./sample-go-app
+  command: "chmod 755 ./sample-go-app && ./sample-go-app"
   routes: 
   - route: sample-go-app-kevin.run.adepttech.ca
   buildpacks:
